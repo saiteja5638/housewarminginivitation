@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Gruha Pravesham – Cherviralla Family</title>
+<style>
+/* ═══════════════════════════════════
+   RESET & ROOT TOKENS
+═══════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --gold:#c9960a;
+  --gold2:#f5c842;
+  --gold3:#7a5c00;
+  --goldglow:rgba(201,150,10,0.35);
+  --cream:#fff8e7;
+  --cream2:#fdf0c8;
+  --red:#b5290d;
+  --saffron:#e07b10;
+  --deep:#090500;
+  --deep2:#110900;
+  --muted:rgba(255,238,180,0.55);
+  --border:rgba(201,150,10,0.28);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep);
+  color:var(--cream);
+  font-family:'Georgia',serif;
+  overflow-x:hidden;
+}
+
+/* ─── PARTICLE CANVAS ─── */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0}
+
+/* ─── SCROLL PROGRESS ─── */
+#prog{
+  position:fixed;top:0;left:0;height:3px;width:0%;z-index:999;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));
+  transition:width 0.1s linear;
+}
+
+/* ═══════════════════════════════════
+   SECTION 0 – SAVE THE DATE POSTER
+═══════════════════════════════════ */
+#save-the-date{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,#2a1000 0%,#090500 60%);
+  padding:30px 20px;
+  z-index:1;
+}
+
+/* Animated border frame */
+.std-frame{
+  position:relative;
+  width:min(94vw,440px);
+  background:linear-gradient(160deg,rgba(201,150,10,0.12) 0%,rgba(9,5,0,0.85) 40%,rgba(201,150,10,0.08) 100%);
+  border:1px solid rgba(201,150,10,0.4);
+  border-radius:28px;
+  padding:40px 30px 36px;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(201,150,10,0.12),
+    0 0 60px rgba(201,150,10,0.08),
+    inset 0 0 60px rgba(201,150,10,0.04);
+}
+
+/* Rotating border glow */
+.std-frame::before{
+  content:'';
+  position:absolute;inset:-2px;
+  border-radius:30px;
+  background:conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(201,150,10,0.6) 60deg,
+    rgba(245,200,66,0.9) 90deg,
+    rgba(201,150,10,0.6) 120deg,
+    transparent 180deg,
+    rgba(201,150,10,0.6) 240deg,
+    rgba(245,200,66,0.9) 270deg,
+    rgba(201,150,10,0.6) 300deg,
+    transparent 360deg
+  );
+  animation:borderSpin 6s linear infinite;
+  z-index:-1;
+}
+.std-frame::after{
+  content:'';
+  position:absolute;inset:1px;
+  background:radial-gradient(ellipse at 50% 0%,#1e0c00,#090500 70%);
+  border-radius:27px;
+  z-index:-1;
+}
+@keyframes borderSpin{to{transform:rotate(360deg)}}
+
+/* Corner ornaments */
+.std-corner{
+  position:absolute;font-size:1.4rem;line-height:1;
+  filter:drop-shadow(0 0 6px rgba(201,150,10,0.7));
+}
+.std-corner.tl{top:14px;left:14px}
+.std-corner.tr{top:14px;right:14px}
+.std-corner.bl{bottom:14px;left:14px}
+.std-corner.br{bottom:14px;right:14px}
+
+/* STD label pill */
+.std-label{
+  display:inline-block;
+  background:linear-gradient(135deg,rgba(201,150,10,0.25),rgba(201,150,10,0.08));
+  border:1px solid rgba(201,150,10,0.5);
+  border-radius:50px;
+  padding:6px 20px;
+  font-size:0.64rem;
+  color:var(--gold2);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+  position:relative;z-index:1;
+}
+
+/* Kalash graphic */
+.std-kalash{
+  font-size:4.5rem;
+  margin-bottom:6px;
+  display:block;
+  filter:drop-shadow(0 0 20px rgba(201,150,10,0.6));
+  animation:kalashFloat 3.5s ease-in-out infinite;
+  position:relative;z-index:1;
+}
+@keyframes kalashFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-10px) scale(1.05)}
+}
+
+/* STD title */
+.std-event-name{
+  font-size:clamp(1.6rem,7vw,2.4rem);
+  color:var(--cream);
+  line-height:1.15;
+  margin-bottom:4px;
+  position:relative;z-index:1;
+  text-shadow:0 2px 20px rgba(0,0,0,0.8);
+}
+.std-event-name .g{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 50%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.std-telugu{
+  font-size:0.95rem;
+  color:var(--gold2);
+  letter-spacing:2px;
+  margin-bottom:22px;
+  font-style:italic;
+  position:relative;z-index:1;
+}
+
+/* Date circle */
+.std-date-ring{
+  position:relative;
+  width:130px;height:130px;
+  margin:0 auto 20px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;z-index:1;
+}
+.std-date-ring svg{
+  position:absolute;inset:0;width:100%;height:100%;
+  animation:rotateSlow 12s linear infinite;
+}
+.std-date-inner{
+  text-align:center;position:relative;z-index:2;
+}
+.std-date-day{
+  font-size:2.6rem;font-weight:bold;
+  color:var(--gold2);
+  line-height:1;
+  text-shadow:0 0 20px rgba(245,200,66,0.6);
+}
+.std-date-month{
+  font-size:0.72rem;color:var(--cream);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-top:2px;
+}
+.std-date-year{
+  font-size:0.68rem;color:var(--gold);
+  letter-spacing:1px;
+}
+
+/* Details strip */
+.std-details{
+  display:flex;flex-direction:column;gap:10px;
+  margin-bottom:22px;
+  position:relative;z-index:1;
+}
+.std-detail-row{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:0.82rem;color:var(--cream);
+}
+.std-detail-row .icon{font-size:1rem;flex-shrink:0}
+.std-detail-row strong{color:var(--gold2)}
+
+/* Family name */
+.std-family{
+  font-size:0.7rem;
+  color:var(--muted);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  border-top:1px solid rgba(201,150,10,0.2);
+  padding-top:16px;
+  margin-top:4px;
+  position:relative;z-index:1;
+}
+.std-family strong{
+  display:block;
+  font-size:1.1rem;
+  color:var(--cream);
+  letter-spacing:1px;
+  text-transform:none;
+  margin-top:4px;
+  font-style:italic;
+}
+
+/* Save button */
+.std-save-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#1a0900;
+  border:none;border-radius:50px;
+  padding:11px 28px;
+  font-size:0.82rem;font-weight:bold;
+  font-family:'Georgia',serif;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(201,150,10,0.4);
+  transition:all 0.3s;
+  position:relative;z-index:1;
+  letter-spacing:0.5px;
+}
+.std-save-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,150,10,0.55)}
+
+/* Hint below poster */
+.std-hint{
+  margin-top:18px;
+  font-size:0.66rem;
+  color:rgba(201,150,10,0.45);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-align:center;
+  position:relative;z-index:1;
+}
+
+/* Scroll down nudge */
+.std-scroll{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  z-index:2;
+}
+.std-scroll span{font-size:0.6rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase}
+.scroll-chevron{
+  width:22px;height:22px;
+  border-right:2px solid var(--gold);
+  border-bottom:2px solid var(--gold);
+  transform:rotate(45deg);
+  animation:bounce 1.6s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0);opacity:0.5}50%{transform:rotate(45deg) translateY(7px);opacity:1}}
+
+/* ═══════════════════════════════════
+   SECTION 1 – CINEMATIC HERO
+═══════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 20%,#251000 0%,#090500 65%);
+  padding:28px 20px 90px;
+  z-index:1;
+}
+
+.mandala-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;opacity:0.06;
+}
+.mandala-bg svg{
+  width:min(130vw,750px);height:auto;
+  animation:rotateSlow 80s linear infinite;
+}
+@keyframes rotateSlow{to{transform:rotate(360deg)}}
+
+.hero-top-border{
+  position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,transparent 0%,var(--gold) 30%,#fff6c0 50%,var(--gold) 70%,transparent 100%);
+  background-size:200% 100%;
+  animation:shimmerBorder 2.5s ease-in-out infinite;
+}
+@keyframes shimmerBorder{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+
+.diya-corner{
+  position:absolute;font-size:2rem;
+  filter:drop-shadow(0 0 8px rgba(255,160,0,0.7));
+  animation:flicker 1.9s ease-in-out infinite;
+}
+.diya-tl{top:18px;left:16px}.diya-tr{top:18px;right:16px}
+.diya-bl{bottom:86px;left:16px}.diya-br{bottom:86px;right:16px}
+@keyframes flicker{
+  0%,100%{filter:drop-shadow(0 0 6px rgba(255,140,0,0.5));transform:scale(1)}
+  50%{filter:drop-shadow(0 0 18px rgba(255,200,0,0.9));transform:scale(1.12)}
+}
+
+.hero-om{
+  font-size:clamp(2.8rem,9vw,5rem);
+  color:var(--gold2);
+  text-shadow:0 0 30px rgba(245,200,66,0.9),0 0 70px rgba(245,200,66,0.4);
+  animation:omGlow 3.2s ease-in-out infinite;
+  margin-bottom:10px;letter-spacing:3px;
+}
+@keyframes omGlow{
+  0%,100%{text-shadow:0 0 20px rgba(245,200,66,0.6)}
+  50%{text-shadow:0 0 60px rgba(245,200,66,1),0 0 100px rgba(201,150,10,0.5)}
+}
+
+.hero-badge{
+  background:linear-gradient(135deg,rgba(201,150,10,0.18),rgba(201,150,10,0.06));
+  border:1px solid rgba(201,150,10,0.45);
+  border-radius:100px;padding:7px 22px;
+  font-size:0.72rem;color:var(--gold2);
+  letter-spacing:3.5px;text-transform:uppercase;
+  margin-bottom:22px;
+  opacity:0;animation:fadeUp 0.8s 0.3s forwards;
+  backdrop-filter:blur(6px);
+}
+
+.hero-title-main{
+  font-size:clamp(2.2rem,8.5vw,4.2rem);
+  color:var(--cream);
+  text-align:center;line-height:1.1;letter-spacing:1px;
+  margin-bottom:8px;
+  opacity:0;animation:fadeUp 0.9s 0.55s forwards;
+  text-shadow:0 4px 30px rgba(0,0,0,0.85);
+}
+.hero-title-main .gold-grad{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 50%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;font-size:1.15em;
+}
+
+.hero-subtitle{
+  font-size:clamp(0.95rem,3.5vw,1.3rem);
+  color:var(--gold2);text-align:center;
+  letter-spacing:2.5px;margin-bottom:20px;
+  font-style:italic;
+  opacity:0;animation:fadeUp 0.9s 0.8s forwards;
+}
+
+.divider{
+  display:flex;align-items:center;gap:14px;
+  margin:14px 0;width:min(92%,420px);
+  opacity:0;animation:fadeUp 0.9s 1s forwards;
+}
+.divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.divider-icon{color:var(--gold);font-size:1.2rem}
+
+.host-card{
+  background:linear-gradient(145deg,rgba(201,150,10,0.14),rgba(201,150,10,0.04));
+  border:1px solid rgba(201,150,10,0.38);
+  border-radius:22px;
+  padding:26px 30px;
+  text-align:center;
+  max-width:420px;width:92%;
+  margin-bottom:22px;
+  opacity:0;animation:fadeUp 1s 1.15s forwards;
+  position:relative;overflow:hidden;
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 40px rgba(201,150,10,0.08),inset 0 0 30px rgba(201,150,10,0.03);
+}
+.host-card::before{
+  content:'';position:absolute;top:-2px;left:8%;right:8%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);
+  border-radius:2px;
+}
+.host-card .glossy-sweep{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.07) 50%,transparent 70%);
+  background-size:200% 100%;
+  animation:glossy 5s ease-in-out infinite;
+}
+@keyframes glossy{0%,100%{background-position:0% 0}50%{background-position:200% 0}}
+
+.host-by{font-size:0.65rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.host-names{font-size:clamp(1.25rem,5vw,1.7rem);color:var(--cream);line-height:1.4;font-weight:bold}
+.host-names .amp{color:var(--gold2);margin:0 7px;font-style:italic;font-weight:normal}
+.host-invite-by{margin-top:12px;font-size:0.8rem;color:var(--muted);line-height:1.7}
+.host-invite-by strong{color:var(--gold2);font-style:italic;font-size:0.9rem}
+
+.dtl-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;width:92%;max-width:420px;
+  margin-bottom:22px;
+  opacity:0;animation:fadeUp 1s 1.35s forwards;
+}
+.dtl-full{grid-column:1/-1}
+.dtl-pill{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(201,150,10,0.22);
+  border-radius:16px;padding:16px 12px;text-align:center;
+  transition:all 0.35s;position:relative;overflow:hidden;
+}
+.dtl-pill::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,150,10,0.06),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.dtl-pill:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 24px rgba(201,150,10,0.15)}
+.dtl-pill:hover::after{opacity:1}
+.dtl-icon{font-size:1.5rem;margin-bottom:7px;display:block}
+.dtl-label{font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
+.dtl-value{font-size:0.9rem;color:var(--cream);font-weight:bold;line-height:1.35}
+.dtl-sub{font-size:0.73rem;color:var(--gold2);margin-top:3px}
+
+.scroll-hint{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeIn 1s 2.2s forwards;
+}
+.scroll-hint span{font-size:0.62rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase}
+
+/* ═══════════════════════════════════
+   SECTION 2 – VIDEO
+═══════════════════════════════════ */
+#video-section{
+  position:relative;background:var(--deep2);z-index:1;
+}
+.video-header{
+  text-align:center;padding:44px 20px 20px;
+  background:linear-gradient(180deg,var(--deep),var(--deep2));
+}
+.eyebrow{font-size:0.66rem;color:var(--gold);letter-spacing:3.5px;text-transform:uppercase;margin-bottom:10px}
+.sec-heading{font-size:clamp(1.4rem,5.5vw,2.3rem);color:var(--cream);line-height:1.2}
+.sec-heading span{color:var(--gold2)}
+
+.video-wrap{
+  position:relative;
+  width:100%;
+  background:#000;
+  display:flex;justify-content:center;
+  overflow:hidden;
+  min-height:280px;
+}
+
+/* Placeholder shown when no video file is available */
+.video-placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:100%;max-width:420px;
+  min-height:320px;
+  background:linear-gradient(145deg,#1a0800,#0d0400);
+  border:1px dashed rgba(201,150,10,0.3);
+  border-radius:0;
+  text-align:center;
+  padding:40px 24px;
+  gap:14px;
+  margin:0 auto;
+}
+.video-placeholder .vp-icon{font-size:4rem;filter:drop-shadow(0 0 14px rgba(201,150,10,0.4))}
+.video-placeholder .vp-title{font-size:1rem;color:var(--cream);font-weight:bold}
+.video-placeholder .vp-sub{font-size:0.78rem;color:var(--muted);line-height:1.7}
+.video-placeholder .vp-badge{
+  display:inline-block;
+  background:rgba(201,150,10,0.12);
+  border:1px solid rgba(201,150,10,0.3);
+  border-radius:50px;padding:6px 18px;
+  font-size:0.68rem;color:var(--gold2);
+  letter-spacing:2px;
+}
+
+.video-bar{
+  position:absolute;left:0;right:0;height:44px;
+  background:#000;z-index:2;pointer-events:none;
+}
+.video-bar.top{top:0}.video-bar.bottom{bottom:0}
+
+#houseVideo{
+  display:block;
+  width:100%;
+  max-width:420px;
+  max-height:82vh;
+  object-fit:cover;
+  margin:0 auto;
+  outline:none;
+}
+#unmuteBtn{
+  position:absolute;bottom:56px;right:16px;z-index:5;
+  background:rgba(0,0,0,0.62);
+  border:1.5px solid rgba(201,150,10,0.55);
+  border-radius:50px;color:var(--cream);
+  font-size:0.78rem;letter-spacing:1px;
+  padding:8px 16px;
+  display:flex;align-items:center;gap:7px;
+  cursor:pointer;backdrop-filter:blur(8px);
+  transition:all 0.3s;
+  animation:fadeIn 0.6s 1s forwards;opacity:0;
+}
+#unmuteBtn:hover{background:rgba(201,150,10,0.22);border-color:var(--gold);transform:translateY(-2px)}
+#unmuteBtn.hidden{display:none}
+#playOverlay{
+  position:absolute;inset:0;z-index:6;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(9,5,0,0.55);flex-direction:column;gap:14px;
+  cursor:pointer;backdrop-filter:blur(3px);
+}
+#playOverlay.show{display:flex}
+#playOverlay .play-circle{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;box-shadow:0 0 40px rgba(201,150,10,0.5);
+  animation:omGlow 2s ease-in-out infinite;
+}
+#playOverlay p{font-size:0.82rem;color:var(--cream);letter-spacing:2px;text-transform:uppercase}
+.video-caption{
+  position:absolute;bottom:50px;left:0;right:0;
+  text-align:center;z-index:4;padding:0 20px;pointer-events:none;
+}
+.video-caption p{
+  font-size:clamp(0.78rem,2.5vw,0.95rem);color:#fff;
+  text-shadow:0 2px 12px rgba(0,0,0,0.9);letter-spacing:1px;font-style:italic;
+}
+.video-caption p span{color:var(--gold2)}
+
+/* ═══════════════════════════════════
+   SECTION 3 – TRANSPORT
+═══════════════════════════════════ */
+#transport{
+  background:linear-gradient(180deg,var(--deep2),#150900 50%,var(--deep2));
+  padding:54px 20px 60px;position:relative;z-index:1;
+}
+.sec-wrap{max-width:500px;margin:0 auto}
+.distance-badge{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:rgba(201,150,10,0.08);border:1px solid var(--border);
+  border-radius:50px;padding:10px 20px;
+  margin-top:18px;margin-bottom:30px;
+  font-size:0.83rem;color:var(--cream);
+}
+.distance-badge strong{color:var(--gold2)}
+
+.transport-cards{display:flex;flex-direction:column;gap:14px}
+.transport-card{
+  background:rgba(255,255,255,0.025);border:1px solid rgba(201,150,10,0.2);
+  border-radius:20px;overflow:hidden;transition:border-color 0.35s,box-shadow 0.35s;
+}
+.transport-card:hover{border-color:rgba(201,150,10,0.45)}
+.transport-card.open{border-color:rgba(201,150,10,0.5);box-shadow:0 0 30px rgba(201,150,10,0.1)}
+.tc-header{
+  display:flex;align-items:center;gap:16px;padding:18px 20px;
+  cursor:pointer;user-select:none;transition:background 0.3s;
+  -webkit-tap-highlight-color:transparent;
+}
+.tc-header:hover,.transport-card.open .tc-header{background:rgba(201,150,10,0.07)}
+.tc-icon{
+  width:54px;height:54px;border-radius:15px;
+  background:linear-gradient(135deg,rgba(201,150,10,0.22),rgba(201,150,10,0.06));
+  border:1px solid rgba(201,150,10,0.32);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;flex-shrink:0;transition:all 0.35s;
+}
+.transport-card.open .tc-icon{
+  background:linear-gradient(135deg,rgba(201,150,10,0.38),rgba(201,150,10,0.12));
+  box-shadow:0 0 22px rgba(201,150,10,0.3);
+}
+.tc-info{flex:1}
+.tc-title{font-size:0.96rem;color:var(--cream);font-weight:bold;margin-bottom:3px}
+.tc-sub{font-size:0.74rem;color:var(--muted)}
+.tc-arrow{font-size:1rem;color:var(--gold);transition:transform 0.38s cubic-bezier(0.34,1.56,0.64,1)}
+.transport-card.open .tc-arrow{transform:rotate(180deg)}
+.tc-body{max-height:0;overflow:hidden;transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1)}
+.transport-card.open .tc-body{max-height:500px}
+.tc-content{padding:4px 20px 22px}
+
+.bus-route{position:relative;padding-left:22px}
+.bus-route::before{
+  content:'';position:absolute;left:8px;top:14px;bottom:14px;width:2px;
+  background:linear-gradient(180deg,var(--gold),var(--saffron),var(--red));border-radius:2px;
+}
+.bus-stop{position:relative;padding:10px 0 10px 22px}
+.bus-stop::before{
+  content:'';position:absolute;left:-8px;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;border-radius:50%;
+  background:var(--gold);border:2px solid var(--deep);
+  box-shadow:0 0 10px rgba(201,150,10,0.7);
+}
+.bus-stop.final::before{background:var(--red);box-shadow:0 0 10px rgba(181,41,13,0.7)}
+.bs-name{font-size:0.9rem;color:var(--cream);font-weight:bold}
+.bs-meta{font-size:0.73rem;color:var(--muted);margin-top:3px}
+
+.tip-box{
+  margin-top:14px;
+  background:rgba(201,150,10,0.07);border:1px solid rgba(201,150,10,0.18);
+  border-radius:12px;padding:12px 16px;
+  font-size:0.79rem;color:var(--muted);line-height:1.65;
+  display:flex;gap:10px;
+}
+.tip-box .tip-icon{flex-shrink:0;font-size:1.1rem;margin-top:1px}
+
+.action-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:14px 20px;border-radius:14px;
+  font-size:0.9rem;font-weight:bold;letter-spacing:0.5px;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:all 0.3s;margin-top:14px;font-family:'Georgia',serif;
+}
+.action-btn.maps{
+  background:linear-gradient(135deg,#b5290d,#e74c3c);color:#fff;
+  box-shadow:0 4px 20px rgba(181,41,13,0.4);
+}
+.action-btn.maps:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(181,41,13,0.55)}
+.action-btn.gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a0900;
+  box-shadow:0 4px 20px rgba(201,150,10,0.35);
+}
+.action-btn.gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,150,10,0.5)}
+
+.vehicle-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.vehicle-link{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:rgba(201,150,10,0.07);border:1px solid rgba(201,150,10,0.2);
+  border-radius:14px;padding:18px 12px;
+  text-decoration:none;color:var(--cream);
+  transition:all 0.3s;text-align:center;
+}
+.vehicle-link:hover{
+  border-color:var(--gold);background:rgba(201,150,10,0.14);
+  transform:translateY(-3px);box-shadow:0 8px 22px rgba(201,150,10,0.2);
+}
+.vehicle-link .vl-icon{font-size:2rem}
+.vehicle-link .vl-label{font-size:0.8rem;font-weight:bold;color:var(--cream)}
+.vehicle-link .vl-sub{font-size:0.68rem;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px}
+
+/* ═══════════════════════════════════
+   SECTION 4 – TEMPLES NEARBY
+═══════════════════════════════════ */
+#temples{
+  background:linear-gradient(180deg,var(--deep2),#1c0800);
+  padding:54px 20px 60px;position:relative;z-index:1;
+}
+#temples::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.temple-intro{text-align:center;max-width:460px;margin:0 auto 32px}
+.temple-intro p{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-top:10px}
+.temple-cards{display:flex;flex-direction:column;gap:16px;max-width:500px;margin:0 auto}
+.temple-card{
+  background:rgba(255,255,255,0.025);border:1px solid rgba(201,150,10,0.2);
+  border-radius:20px;overflow:hidden;transition:all 0.35s;
+}
+.temple-card:hover{
+  border-color:rgba(201,150,10,0.5);box-shadow:0 0 28px rgba(201,150,10,0.12);
+  transform:translateY(-2px);
+}
+.temple-img{
+  width:100%;height:160px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.temple-img .t-emoji{
+  font-size:5rem;filter:drop-shadow(0 0 20px rgba(255,180,0,0.5));
+  animation:floatTemple 4s ease-in-out infinite;position:relative;z-index:2;
+}
+@keyframes floatTemple{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.temple-img .t-glow{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1}
+.temple-img .t-glow::after{
+  content:'';width:120px;height:120px;border-radius:50%;
+  animation:glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse{
+  0%,100%{box-shadow:0 0 30px 10px rgba(201,150,10,0.2)}
+  50%{box-shadow:0 0 60px 30px rgba(245,200,66,0.35)}
+}
+.t-yadadri .temple-img{background:linear-gradient(145deg,#1a0800,#2d1400,#1a0a00)}
+.t-surendra .temple-img{background:linear-gradient(145deg,#060d1a,#0d1a2d,#060d1a)}
+.t-swarnagiri .temple-img{background:linear-gradient(145deg,#1a1400,#2d2600,#1a1400)}
+.temple-body{padding:18px 20px 20px}
+.temple-name{font-size:1.05rem;color:var(--cream);font-weight:bold;margin-bottom:4px}
+.temple-tagline{font-size:0.74rem;color:var(--gold2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.temple-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.temple-dist{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(201,150,10,0.1);border:1px solid rgba(201,150,10,0.22);
+  border-radius:50px;padding:5px 12px;
+  font-size:0.73rem;color:var(--gold2);margin-bottom:12px;
+}
+
+/* ═══════════════════════════════════
+   SECTION 5 – PROGRAMME SCHEDULE  (NEW)
+═══════════════════════════════════ */
+#schedule{
+  background:linear-gradient(180deg,#1c0800,var(--deep2));
+  padding:54px 20px 60px;
+  position:relative;z-index:1;
+}
+#schedule::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.schedule-intro{text-align:center;max-width:460px;margin:0 auto 32px}
+.schedule-intro p{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-top:10px}
+
+.timeline{
+  max-width:460px;margin:0 auto;
+  position:relative;padding-left:28px;
+}
+.timeline::before{
+  content:'';
+  position:absolute;left:12px;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(180deg,var(--gold),var(--saffron),var(--red),var(--gold));
+  border-radius:2px;
+}
+.tl-item{
+  position:relative;margin-bottom:22px;
+  padding:16px 18px 16px 22px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(201,150,10,0.18);
+  border-radius:16px;
+  transition:all 0.35s;
+}
+.tl-item:hover{border-color:rgba(201,150,10,0.45);transform:translateX(4px)}
+.tl-item::before{
+  content:'';
+  position:absolute;left:-22px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;border-radius:50%;
+  background:var(--gold);border:2px solid var(--deep);
+  box-shadow:0 0 12px rgba(201,150,10,0.8);
+  transition:box-shadow 0.3s;
+}
+.tl-item:hover::before{box-shadow:0 0 20px rgba(245,200,66,1)}
+.tl-item.highlight{border-color:rgba(201,150,10,0.4);background:rgba(201,150,10,0.06)}
+.tl-item.highlight::before{background:var(--gold2);box-shadow:0 0 16px rgba(245,200,66,0.9)}
+.tl-time{
+  font-size:0.7rem;color:var(--gold);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:5px;
+}
+.tl-title{font-size:0.96rem;color:var(--cream);font-weight:bold;margin-bottom:3px}
+.tl-desc{font-size:0.78rem;color:var(--muted);line-height:1.6}
+.tl-emoji{float:right;font-size:1.5rem;margin-top:-2px;margin-left:10px}
+
+/* ═══════════════════════════════════
+   SECTION 6 – FINALE / CLOSING
+═══════════════════════════════════ */
+#finale{
+  background:radial-gradient(ellipse at 50% 0%,#2a1100 0%,#090500 55%);
+  padding:64px 20px 80px;
+  position:relative;overflow:hidden;z-index:1;text-align:center;
+}
+#finale::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);
+}
+.flowers-row{
+  font-size:2rem;letter-spacing:10px;margin-bottom:22px;
+  animation:sway 2.2s ease-in-out infinite;display:block;
+}
+@keyframes sway{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.finale-title{
+  font-size:clamp(1.5rem,6vw,2.4rem);color:var(--cream);line-height:1.4;
+  max-width:440px;margin:0 auto 14px;text-shadow:0 2px 20px rgba(0,0,0,0.7);
+}
+.finale-title span{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.finale-sub{
+  font-size:0.87rem;color:var(--muted);line-height:1.85;
+  max-width:360px;margin:0 auto 34px;
+}
+.note-card{
+  background:linear-gradient(145deg,rgba(201,150,10,0.14),rgba(201,150,10,0.04));
+  border:1px solid rgba(201,150,10,0.35);
+  border-radius:24px;padding:28px 24px;
+  max-width:440px;margin:0 auto 28px;
+  position:relative;overflow:hidden;text-align:left;
+}
+.note-card::before{
+  content:'';position:absolute;top:-2px;left:8%;right:8%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.note-card .glossy-sweep{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.07) 50%,transparent 70%);
+  background-size:200% 100%;animation:glossy 5s ease-in-out infinite;
+}
+.note-header{font-size:0.85rem;color:var(--gold2);margin-bottom:14px;letter-spacing:1px}
+.note-text{font-size:0.84rem;color:var(--cream);line-height:1.85}
+.note-text strong{color:var(--gold2)}
+.contact-row{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;
+}
+.contact-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:13px 22px;border-radius:14px;
+  text-decoration:none;font-size:0.85rem;font-weight:bold;
+  transition:all 0.3s;border:1px solid;cursor:pointer;font-family:'Georgia',serif;
+}
+.wa{background:rgba(37,211,102,0.11);border-color:rgba(37,211,102,0.35);color:#25d366}
+.wa:hover{background:rgba(37,211,102,0.2);transform:translateY(-2px)}
+.ca{background:rgba(201,150,10,0.11);border-color:rgba(201,150,10,0.35);color:var(--gold2)}
+.ca:hover{background:rgba(201,150,10,0.2);transform:translateY(-2px)}
+.finale-footer{font-size:0.72rem;color:rgba(201,150,10,0.45);letter-spacing:1.5px;line-height:2}
+.finale-footer strong{color:var(--gold);letter-spacing:3px;font-size:0.78rem}
+.kalash-row{font-size:1.8rem;letter-spacing:12px;margin-top:24px;opacity:0.65}
+
+/* ═══════════════════════════════════
+   SEPARATOR
+═══════════════════════════════════ */
+.gold-sep{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,150,10,0.3),transparent);
+}
+
+/* ═══════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.75s cubic-bezier(0.22,1,0.36,1),transform 0.75s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-scale{opacity:0;transform:scale(0.9);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+@keyframes ripple{to{width:220px;height:220px;opacity:0}}
+.ripple-host{position:relative;overflow:hidden}
+
+@media(max-width:380px){
+  .dtl-grid{grid-template-columns:1fr}
+  .dtl-full{grid-column:1}
+  .host-card{padding:18px 16px}
+  .vehicle-grid{grid-template-columns:1fr}
+  .contact-row{flex-direction:column;align-items:center}
+  .std-frame{padding:30px 18px 28px}
+}
+
+/* ─── Countdown timer ─── */
+.countdown-wrap{
+  display:flex;gap:12px;justify-content:center;
+  margin:16px 0 0;position:relative;z-index:1;
+}
+.cd-box{
+  display:flex;flex-direction:column;align-items:center;
+  background:rgba(201,150,10,0.1);
+  border:1px solid rgba(201,150,10,0.28);
+  border-radius:12px;padding:10px 14px;min-width:56px;
+}
+.cd-num{font-size:1.5rem;color:var(--gold2);font-weight:bold;line-height:1}
+.cd-label{font-size:0.55rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.cd-sep{font-size:1.4rem;color:var(--gold);align-self:center;margin-top:-8px}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div id="prog"></div>
+
+<!-- ══════════════ SAVE THE DATE ══════════════ -->
+<section id="save-the-date">
+  <div class="std-frame reveal-scale">
+    <span class="std-corner tl">🪔</span>
+    <span class="std-corner tr">🪔</span>
+    <span class="std-corner bl">🌸</span>
+    <span class="std-corner br">🌸</span>
+
+    <div class="std-label">✦ Save The Date ✦</div>
+
+    <span class="std-kalash">🏺</span>
+
+    <h1 class="std-event-name">
+      Gruha Pravesham<br>
+      <span class="g">House Warming</span>
+    </h1>
+    <div class="std-telugu">🏠 నూతన గృహ ప్రవేశం 🏠</div>
+
+    <!-- Animated date ring -->
+    <div class="std-date-ring">
+      <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <circle cx="65" cy="65" r="60" stroke="rgba(201,150,10,0.25)" stroke-width="1"/>
+        <circle cx="65" cy="65" r="54" stroke="rgba(201,150,10,0.15)" stroke-width="0.5" stroke-dasharray="4 3"/>
+        <circle cx="65" cy="65" r="62" stroke="url(#spinGrad)" stroke-width="2" stroke-linecap="round" stroke-dasharray="80 320"/>
+        <defs>
+          <linearGradient id="spinGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f5c842"/>
+            <stop offset="100%" stop-color="#c9960a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="std-date-inner">
+        <div class="std-date-day">25</div>
+        <div class="std-date-month">June 2026</div>
+        <div class="std-date-year">Thursday</div>
+      </div>
+    </div>
+
+    <!-- Countdown timer -->
+    <div class="countdown-wrap" id="countdown">
+      <div class="cd-box"><span class="cd-num" id="cd-d">--</span><span class="cd-label">Days</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cd-h">--</span><span class="cd-label">Hrs</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cd-m">--</span><span class="cd-label">Min</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cd-s">--</span><span class="cd-label">Sec</span></div>
+    </div>
+
+    <div class="std-details" style="margin-top:20px">
+      <div class="std-detail-row">
+        <span class="icon">⏰</span>
+        <div>Ceremony begins at <strong>09:00 AM onwards</strong></div>
+      </div>
+      <div class="std-detail-row">
+        <span class="icon">📍</span>
+        <div>Bondhugula Village, <strong>Yadadri-Bhuvangiri</strong>, Telangana</div>
+      </div>
+      <div class="std-detail-row">
+        <span class="icon">🍽️</span>
+        <div>Lunch &amp; refreshments <strong>warmly served</strong></div>
+      </div>
+    </div>
+
+    <div class="std-family">
+      Hosted by
+      <strong>Cherviralla Family<br>Mr. Srinivas &amp; Mrs. Latha</strong>
+    </div>
+
+    <button class="std-save-btn ripple-host" onclick="addToCalendar()">
+      📅 &nbsp;Add to Calendar
+    </button>
+  </div>
+
+  <div class="std-hint">↓ &nbsp; Scroll for full invitation &nbsp; ↓</div>
+
+  <div class="std-scroll">
+    <span>scroll</span>
+    <div class="scroll-chevron"></div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="mandala-bg">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="200" cy="200" r="185" stroke="#d4a843" stroke-width="0.5" opacity="0.7"/>
+      <circle cx="200" cy="200" r="155" stroke="#d4a843" stroke-width="0.4" opacity="0.5"/>
+      <circle cx="200" cy="200" r="125" stroke="#d4a843" stroke-width="0.5" opacity="0.65"/>
+      <circle cx="200" cy="200" r="95"  stroke="#d4a843" stroke-width="0.4" opacity="0.7"/>
+      <circle cx="200" cy="200" r="65"  stroke="#d4a843" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="35"  stroke="#d4a843" stroke-width="0.4"/>
+      <g stroke="#d4a843" stroke-width="0.4" opacity="0.5">
+        <line x1="200" y1="15"  x2="200" y2="385"/>
+        <line x1="15"  y1="200" x2="385" y2="200"/>
+        <line x1="70"  y1="70"  x2="330" y2="330"/>
+        <line x1="330" y1="70"  x2="70"  y2="330"/>
+        <line x1="28"  y1="140" x2="372" y2="260"/>
+        <line x1="28"  y1="260" x2="372" y2="140"/>
+        <line x1="140" y1="28"  x2="260" y2="372"/>
+        <line x1="260" y1="28"  x2="140" y2="372"/>
+      </g>
+      <g fill="#d4a843" opacity="0.45">
+        <polygon points="200,18 211,38 189,38"/>
+        <polygon points="200,382 211,362 189,362"/>
+        <polygon points="18,200 38,189 38,211"/>
+        <polygon points="382,200 362,189 362,211"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-top-border"></div>
+  <div class="diya-corner diya-tl">🪔</div>
+  <div class="diya-corner diya-tr">🪔</div>
+  <div class="diya-corner diya-bl">🌸</div>
+  <div class="diya-corner diya-br">🌸</div>
+
+  <div class="hero-om">ॐ</div>
+
+  <div class="hero-badge">✦ శుభ స్వాగతం ✦</div>
+
+  <h1 class="hero-title-main">
+    Gruha Pravesham<br>
+    <span class="gold-grad">House Warming</span>
+    Ceremony
+  </h1>
+
+  <p class="hero-subtitle">🏠 నూతన గృహ ప్రవేశం 🏠</p>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="host-card ripple-host">
+    <div class="glossy-sweep"></div>
+    <div class="host-by">Hosted With Love By</div>
+    <div class="host-names">
+      Cherviralla's Family<br>
+      Mr. Srinivas <span class="amp">&amp;</span> Mrs. Latha
+    </div>
+    <div class="host-invite-by">
+      You're Invited By<br>
+      <strong>Cherviralla Sai Teja</strong><br>
+      <span style="font-size:0.73rem;color:var(--muted)">Your Dear Colleague 💐</span>
+    </div>
+  </div>
+
+  <div class="dtl-grid">
+    <div class="dtl-pill ripple-host">
+      <span class="dtl-icon">📅</span>
+      <div class="dtl-label">Date</div>
+      <div class="dtl-value">25 June 2026</div>
+      <div class="dtl-sub">Thursday</div>
+    </div>
+    <div class="dtl-pill ripple-host">
+      <span class="dtl-icon">⏰</span>
+      <div class="dtl-label">Time</div>
+      <div class="dtl-value">09:00 AM</div>
+      <div class="dtl-sub">Onwards</div>
+    </div>
+    <div class="dtl-pill dtl-full ripple-host">
+      <span class="dtl-icon">📍</span>
+      <div class="dtl-label">Venue</div>
+      <div class="dtl-value">Village: Bondhugula</div>
+      <div class="dtl-sub">Mandal: Rajapet &nbsp;·&nbsp; District: Yadadri-Bhuvangiri<br>Telangana – 508105</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll to continue</span>
+    <div class="scroll-chevron"></div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ══════════════ VIDEO ══════════════ -->
+<section id="video-section">
+  <div class="video-header reveal">
+    <div class="eyebrow">🎬 A Special Glimpse</div>
+    <h2 class="sec-heading">Our New <span>Home</span></h2>
+  </div>
+
+  <div class="video-wrap reveal-scale">
+    <div id="videoContainer">
+      <!-- Video loads if file is present; placeholder shown otherwise -->
+      <video
+        id="houseVideo"
+        playsinline muted autoplay loop preload="auto"
+        style="display:block;width:100%;max-width:420px;max-height:82vh;object-fit:cover;margin:0 auto;outline:none;"
+        onerror="showVideoPlaceholder()"
+      >
+        <source src="intro-video.mp4" type="video/mp4">
+      </video>
+
+      <div id="playOverlay">
+        <div class="play-circle">▶</div>
+        <p>Tap to Play</p>
+      </div>
+
+      <button id="unmuteBtn" aria-label="Unmute video">
+        🔇 &nbsp;Tap to Unmute
+      </button>
+    </div>
+
+    <!-- Fallback placeholder (hidden by default, shown on error) -->
+    <div id="videoPlaceholder" class="video-placeholder" style="display:none;">
+      <span class="vp-icon">🏠</span>
+      <div class="vp-title">Video Coming Soon</div>
+      <div class="vp-sub">
+        Place your video file <strong style="color:var(--gold2)">IMG_7343.MP4</strong> in the same folder as this HTML file to display your home tour here.
+      </div>
+      <span class="vp-badge">🎬 House Tour Video</span>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ══════════════ TRANSPORT ══════════════ -->
+<section id="transport">
+  <div class="sec-wrap">
+    <div class="transport-intro reveal" style="text-align:center;margin-bottom:10px">
+      <div class="eyebrow">🚌 How to Reach</div>
+      <h2 class="sec-heading">Getting to <span>Bondhugula</span></h2>
+    </div>
+    <div class="distance-badge reveal">
+      🛣️ &nbsp; Approximately <strong>&nbsp;90 km&nbsp;</strong> from Hyderabad
+    </div>
+
+    <div class="transport-cards">
+      <div class="transport-card reveal" id="busCard">
+        <div class="tc-header ripple-host" onclick="toggleCard('busCard')">
+          <div class="tc-icon">🚌</div>
+          <div class="tc-info">
+            <div class="tc-title">By Bus</div>
+            <div class="tc-sub">Public transport route · ~90 km</div>
+          </div>
+          <div class="tc-arrow">▾</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-content">
+            <div class="bus-route">
+              <div class="bus-stop">
+                <div class="bs-name">🟢 Uppal / JBS (Jubilee Bus Stand)</div>
+                <div class="bs-meta">Board bus towards Yadadri / Bhuvangiri</div>
+              </div>
+              <div style="padding:4px 0 4px 4px;color:var(--gold);font-size:0.9rem">↓</div>
+              <div class="bus-stop">
+                <div class="bs-name">🟡 Yadadri-Bhuvangiri Bus Stand</div>
+                <div class="bs-meta">Alight here — well-connected from Hyderabad</div>
+              </div>
+              <div style="padding:4px 0 4px 4px;color:var(--gold);font-size:0.9rem">↓</div>
+              <div class="bus-stop final">
+                <div class="bs-name">🏠 Bondhugula Village</div>
+                <div class="bs-meta">Auto / local ride from Yadadri (~5–8 km, Rajapet road)</div>
+              </div>
+            </div>
+            <div class="tip-box">
+              <span class="tip-icon">💡</span>
+              <div>Buses from Uppal/JBS to Yadadri are frequent. From Yadadri Bus Stand, take an auto-rickshaw towards Rajapet and tell them <strong style="color:var(--gold2)">"Bondhugula Village — Cherviralla Intiki"</strong>. Locals know the area!</div>
+            </div>
+            <a href="https://maps.app.goo.gl/jvpgNTN2TrBBd92p9" target="_blank" rel="noopener" class="action-btn maps ripple-host">
+              📍 Open Venue in Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="transport-card reveal" id="vehicleCard">
+        <div class="tc-header ripple-host" onclick="toggleCard('vehicleCard')">
+          <div class="tc-icon">🚗</div>
+          <div class="tc-info">
+            <div class="tc-title">By Bike or Car</div>
+            <div class="tc-sub">Tap a vehicle to open Google Maps navigation</div>
+          </div>
+          <div class="tc-arrow">▾</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-content">
+            <div class="vehicle-grid">
+              <a href="https://maps.app.goo.gl/jvpgNTN2TrBBd92p9" target="_blank" rel="noopener" class="vehicle-link">
+                <span class="vl-icon">🏍️</span>
+                <span class="vl-label">By Bike</span>
+                <span class="vl-sub">Open Maps ↗</span>
+              </a>
+              <a href="https://maps.app.goo.gl/jvpgNTN2TrBBd92p9" target="_blank" rel="noopener" class="vehicle-link">
+                <span class="vl-icon">🚗</span>
+                <span class="vl-label">By Car</span>
+                <span class="vl-sub">Open Maps ↗</span>
+              </a>
+            </div>
+            <div class="tip-box" style="margin-top:14px">
+              <span class="tip-icon">🗺️</span>
+              <div>Route: Hyderabad → Uppal → Ghatkesar → Bhongir → Yadadri → Rajapet → <strong style="color:var(--gold2)">Bondhugula</strong>. Allow ~2 hrs from Hyderabad.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ══════════════ PROGRAMME SCHEDULE ══════════════ -->
+<section id="schedule">
+  <div class="schedule-intro reveal">
+    <div class="eyebrow">📋 Programme</div>
+    <h2 class="sec-heading">Day's <span>Schedule</span></h2>
+    <p>Here's a glimpse of the auspicious events planned for the morning. All rituals will be conducted by learned priests with traditional Vedic ceremonies.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <span class="tl-emoji">🌅</span>
+      <div class="tl-time">09:00 AM</div>
+      <div class="tl-title">Guest Arrival & Welcome</div>
+      <div class="tl-desc">Guests welcomed with traditional aarti, flowers and kumkum. Light snacks and refreshments served.</div>
+    </div>
+    <div class="tl-item highlight reveal">
+      <span class="tl-emoji">🪔</span>
+      <div class="tl-time">09:30 AM</div>
+      <div class="tl-title">Ganapathi Puja</div>
+      <div class="tl-desc">Commencement of all auspicious rituals with Lord Ganesha's blessings — removing all obstacles.</div>
+    </div>
+    <div class="tl-item reveal">
+      <span class="tl-emoji">🏺</span>
+      <div class="tl-time">10:00 AM</div>
+      <div class="tl-title">Gruha Pravesham Homam</div>
+      <div class="tl-desc">Sacred fire ritual (Homam) performed by priests invoking blessings for the new home and family.</div>
+    </div>
+    <div class="tl-item highlight reveal">
+      <span class="tl-emoji">🐄</span>
+      <div class="tl-time">11:00 AM</div>
+      <div class="tl-title">Cow Puja & Vastu Shanti</div>
+      <div class="tl-desc">Traditional Vastu puja performed to harmonise the home's energies for peace, prosperity and health.</div>
+    </div>
+    <div class="tl-item reveal">
+      <span class="tl-emoji">🙏</span>
+      <div class="tl-time">11:45 AM</div>
+      <div class="tl-title">Aashirvadam (Blessings)</div>
+      <div class="tl-desc">Elders and guests bless the family and new home. Prasadam distributed to all attendees.</div>
+    </div>
+    <div class="tl-item highlight reveal">
+      <span class="tl-emoji">🍽️</span>
+      <div class="tl-time">12:30 PM</div>
+      <div class="tl-title">Grand Feast (Bhojanam)</div>
+      <div class="tl-desc">Traditional Telugu lunch served on banana leaves — a warm, joyful feast for all guests. 🌿</div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ══════════════ NEARBY TEMPLES ══════════════ -->
+<section id="temples">
+  <div class="temple-intro reveal">
+    <div class="eyebrow">🛕 Divine Detour</div>
+    <h2 class="sec-heading">Temples <span>Nearby</span></h2>
+    <p>Since you're travelling to this sacred region, don't miss these beautiful temples just a short distance away. A perfect spiritual experience for everyone!</p>
+  </div>
+
+  <div class="temple-cards">
+    <div class="temple-card t-yadadri reveal">
+      <div class="temple-img">
+        <div class="t-glow"></div>
+        <span class="t-emoji">🏛️</span>
+      </div>
+      <div class="temple-body">
+        <div class="temple-name">Sri Lakshmi Narasimha Swamy Temple</div>
+        <div class="temple-tagline">✦ Yadadri-Bhuvangiri ✦</div>
+        <div class="temple-dist">📍 ~5 km from Bondhugula · On your route!</div>
+        <div class="temple-desc">One of Telangana's most revered pilgrimage sites, recently renovated with grand gopurams and intricate carvings. Lord Narasimha manifested here in five forms — a breathtakingly beautiful must-visit!</div>
+        <a href="https://www.google.com/maps/search/Yadadri+Lakshmi+Narasimha+Swamy+temple" target="_blank" rel="noopener" class="action-btn maps ripple-host" style="margin-top:0">🗺️ View on Maps</a>
+      </div>
+    </div>
+
+    <div class="temple-card t-surendra reveal">
+      <div class="temple-img">
+        <div class="t-glow"></div>
+        <span class="t-emoji">🕌</span>
+      </div>
+      <div class="temple-body">
+        <div class="temple-name">Surendrapuri — Kashi Vishwanath</div>
+        <div class="temple-tagline">✦ Surendrapuri ✦</div>
+        <div class="temple-dist">📍 ~20 km · Near Yadadri</div>
+        <div class="temple-desc">A unique spiritual park recreating the sacred atmosphere of Kashi. Features 108 Shiva Lingas, divine sculptures and the famous 85-ft Kailash Mountain — extraordinary for devotees of all ages.</div>
+        <a href="https://www.google.com/maps/search/Surendrapuri+temple+Yadadri+Telangana" target="_blank" rel="noopener" class="action-btn maps ripple-host" style="margin-top:0">🗺️ View on Maps</a>
+      </div>
+    </div>
+
+    <div class="temple-card t-swarnagiri reveal">
+      <div class="temple-img">
+        <div class="t-glow"></div>
+        <span class="t-emoji">⛰️</span>
+      </div>
+      <div class="temple-body">
+        <div class="temple-name">Swarnagiri (Golden Hill Temple)</div>
+        <div class="temple-tagline">✦ Rajapet · Yadadri District ✦</div>
+        <div class="temple-dist">📍 ~10 km · En route to venue</div>
+        <div class="temple-desc">Nestled atop a scenic golden hill near Rajapet with panoramic Deccan views. The trek is a refreshing spiritual experience with deep local significance — very close to Bondhugula village!</div>
+        <a href="https://www.google.com/maps/search/Swarnagiri+temple+Rajapet+Telangana" target="_blank" rel="noopener" class="action-btn maps ripple-host" style="margin-top:0">🗺️ View on Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ══════════════ FINALE ══════════════ -->
+<section id="finale">
+  <span class="flowers-row reveal">🌸🌺🌸🌺🌸</span>
+
+  <h2 class="finale-title reveal">
+    Please Do <span>Attend</span><br>Our House Warming Ceremony
+  </h2>
+
+  <p class="finale-sub reveal">
+    Your presence will make our new home truly complete.<br>
+    Come, seek blessings, enjoy a warm meal, and create beautiful memories with us. 🙏
+  </p>
+
+  <div class="note-card reveal">
+    <div class="glossy-sweep"></div>
+    <div class="note-header">✨ A Personal Note from Sai Teja</div>
+    <div class="note-text">
+      Dear Friend / Colleague / Family,<br><br>
+      This is a very special milestone for our family — our <strong>new home</strong> in Bondhugula. I would be truly honoured and grateful to have you with us on this auspicious Thursday morning.<br><br>
+      Please plan to arrive by <strong>9:00 AM on 25th June 2026</strong>. Lunch and refreshments will be warmly served for all guests 🍽️<br><br>
+      Your blessings mean the world to us.<br><br>
+      — <strong>Sai Teja &amp; Cherviralla Family</strong> 🙏
+    </div>
+  </div>
+
+  <div class="contact-row reveal">
+    <a href="https://wa.me/917036305638" class="contact-btn wa ripple-host" target="_blank" rel="noopener">
+      💬 &nbsp;WhatsApp
+    </a>
+    <a href="tel:+917036305638" class="contact-btn ca ripple-host">
+      📞 &nbsp;Call Us
+    </a>
+  </div>
+
+  <a href="https://maps.app.goo.gl/jvpgNTN2TrBBd92p9" target="_blank" rel="noopener"
+     class="action-btn gold ripple-host" style="max-width:420px;margin:0 auto 36px;display:flex">
+    📍 Get Directions to Venue
+  </a>
+
+  <div class="finale-footer reveal">
+    <strong>ॐ CHERVIRALLA FAMILY ॐ</strong><br>
+    Bondhugula, Rajapet · Yadadri-Bhuvangiri · Telangana 508105<br><br>
+    🪔 May God bless our new home with love, light &amp; laughter 🪔
+  </div>
+
+  <div class="kalash-row">🏺&nbsp;🌺&nbsp;🏺</div>
+</section>
+
+<script>
+/* ════════ SCROLL PROGRESS ════════ */
+window.addEventListener('scroll',()=>{
+  const p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  document.getElementById('prog').style.width=p+'%';
+},{passive:true});
+
+/* ════════ COUNTDOWN TIMER ════════ */
+function updateCountdown(){
+  const target=new Date('2026-06-25T09:00:00+05:30').getTime();
+  const now=Date.now();
+  const diff=target-now;
+  if(diff<=0){
+    document.getElementById('countdown').innerHTML='<div style="color:var(--gold2);font-size:1rem;letter-spacing:2px">🎉 Today is the Day!</div>';
+    return;
+  }
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+/* ════════ ADD TO CALENDAR ════════ */
+function addToCalendar(){
+  const title=encodeURIComponent('Gruha Pravesham – Cherviralla Family');
+  const details=encodeURIComponent('House Warming Ceremony\nHosted by Mr. Srinivas & Mrs. Latha\nInvited by Cherviralla Sai Teja\nLunch & refreshments served');
+  const location=encodeURIComponent('Bondhugula Village, Rajapet, Yadadri-Bhuvangiri, Telangana 508105');
+  const start='20260625T030000Z'; // 9AM IST = 3:30AM UTC → rounded to 3AM for ease
+  const end='20260625T090000Z';   // 2:30PM IST
+  const url=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${start}/${end}`;
+  window.open(url,'_blank');
+}
+
+/* ════════ PARTICLES ════════ */
+(function(){
+  const cv=document.getElementById('particles'),ctx=cv.getContext('2d');
+  let W,H,pts=[];
+  function rs(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight}
+  rs();window.addEventListener('resize',rs,{passive:true});
+  function mk(){
+    pts=[];
+    const n=Math.min(55,Math.floor(W*H/16000));
+    for(let i=0;i<n;i++) pts.push({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*1.7+0.3,
+      vx:(Math.random()-0.5)*0.22,
+      vy:-Math.random()*0.45-0.08,
+      op:Math.random()*0.45+0.08,
+      c:Math.random()>0.5?'#c9960a':'#f5c842'
+    });
+  }
+  mk();window.addEventListener('resize',mk,{passive:true});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.c;ctx.globalAlpha=p.op;ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-5){p.y=H+4;p.x=Math.random()*W}
+      if(p.x<-4)p.x=W+4;if(p.x>W+4)p.x=-4;
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ════════ SCROLL REVEAL ════════ */
+(function(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('visible'),i*70);
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal,.reveal-scale').forEach(el=>obs.observe(el));
+})();
+
+/* ════════ VIDEO ════════ */
+function showVideoPlaceholder(){
+  document.getElementById('videoContainer').style.display='none';
+  document.getElementById('videoPlaceholder').style.display='flex';
+}
+
+var _vid,_overlay,_unmuteBtn,_hasPlayed=false;
+
+function _videoInit(){
+  _vid=document.getElementById('houseVideo');
+  _overlay=document.getElementById('playOverlay');
+  _unmuteBtn=document.getElementById('unmuteBtn');
+  if(!_vid)return;
+
+  // Check if video source exists
+  _vid.addEventListener('error',showVideoPlaceholder);
+
+  if(_unmuteBtn)_unmuteBtn.addEventListener('click',unmuteVideo);
+  if(_overlay)_overlay.addEventListener('click',overlayPlay);
+
+  _vid.muted=true;
+  var p=_vid.play();
+  if(p!==undefined){
+    p.then(function(){
+      if(_overlay)_overlay.classList.remove('show');
+      if(_unmuteBtn)_unmuteBtn.classList.remove('hidden');
+    }).catch(function(){
+      if(_overlay)_overlay.classList.add('show');
+      if(_unmuteBtn)_unmuteBtn.classList.add('hidden');
+    });
+  }
+
+  var scrollObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&!_hasPlayed){
+        _vid.muted=true;
+        _vid.play().then(function(){
+          _hasPlayed=true;
+          if(_overlay)_overlay.classList.remove('show');
+          if(_unmuteBtn)_unmuteBtn.classList.remove('hidden');
+        }).catch(function(){
+          if(_overlay)_overlay.classList.add('show');
+        });
+      }
+      if(!e.isIntersecting&&_hasPlayed)_vid.pause();
+      if(e.isIntersecting&&_hasPlayed)_vid.play().catch(function(){});
+    });
+  },{threshold:0.25});
+  scrollObs.observe(_vid);
+}
+
+function unmuteVideo(){
+  if(!_vid)return;
+  _vid.muted=false;
+  _vid.play().catch(function(){_vid.muted=true;});
+  if(_unmuteBtn){
+    _unmuteBtn.innerHTML='🔊 &nbsp;Sound On';
+    _unmuteBtn.style.borderColor='var(--gold2)';
+    setTimeout(function(){_unmuteBtn.classList.add('hidden');},2200);
+  }
+}
+
+function overlayPlay(){
+  if(!_vid)return;
+  _vid.muted=false;
+  _vid.play().then(function(){
+    _hasPlayed=true;
+    if(_overlay)_overlay.classList.remove('show');
+    if(_unmuteBtn)_unmuteBtn.classList.add('hidden');
+  }).catch(function(){
+    _vid.muted=true;
+    _vid.play().then(function(){
+      _hasPlayed=true;
+      if(_overlay)_overlay.classList.remove('show');
+      if(_unmuteBtn)_unmuteBtn.classList.remove('hidden');
+    }).catch(function(){});
+  });
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',_videoInit);
+}else{
+  _videoInit();
+}
+
+/* ════════ TRANSPORT ACCORDION ════════ */
+function toggleCard(id){
+  const card=document.getElementById(id);
+  if(!card)return;
+  const wasOpen=card.classList.contains('open');
+  document.querySelectorAll('.transport-card').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen)card.classList.add('open');
+}
+
+/* ════════ TOUCH RIPPLE ════════ */
+document.addEventListener('click',function(e){
+  const host=e.target.closest('.ripple-host');
+  if(!host)return;
+  const r=document.createElement('span');
+  const rect=host.getBoundingClientRect();
+  const x=e.clientX-rect.left,y=e.clientY-rect.top;
+  r.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:0;height:0;
+    background:rgba(201,150,10,0.28);border-radius:50%;
+    transform:translate(-50%,-50%);
+    animation:ripple 0.55s ease-out forwards;
+    pointer-events:none;z-index:10;`;
+  host.appendChild(r);
+  setTimeout(()=>r.remove(),560);
+},{passive:true});
+</script>
+</body>
+</html>
